@@ -11,11 +11,20 @@ public class Main {
       previous.setNext(current);
       previous = current;
     }
-    System.out.println(first);
-    first = AddElement(69, first);
-    System.out.println(first);
+    System.out.println(isInList(first, 3));
+    System.out.println(isInList(first, 69));
   }
   private static Node<Integer> AddElement(int value, Node<Integer> current) {
     return new Node<Integer>(value, current);
+  }
+  private static boolean isInList(Node<Integer> first, int target) {
+    Node<Integer> current = first;
+
+    while (current.getNext() != null) {
+      if (current.getValue() == target) return true;
+      current = current.getNext();
+    }
+
+    return false;
   }
 }
