@@ -28,6 +28,6 @@ public class Node <T> {
     return (this.next != null);
   }
   public String toString() {
-    return this.next.toString();
+    return this.value.toString();
   }
 }
