@@ -11,8 +11,9 @@ public class Main {
       previous.setNext(current);
       previous = current;
     }
-    System.out.println(isInList(first, 3));
-    System.out.println(isInList(first, 69));
+    System.out.println(getNumOfNodes(first));
+    AddElement(123, first);
+    System.out.println(getNumOfNodes(first));
   }
   private static Node<Integer> AddElement(int value, Node<Integer> current) {
     return new Node<Integer>(value, current);
@@ -26,5 +27,14 @@ public class Main {
     }
 
     return false;
+  }
+  public static int getNumOfNodes(Node<Integer> first) {
+    int count = 0;
+    while (first.getNext() != null) {
+      count++;
+      first = first.getNext();
+    }
+
+    return count;
   }
 }
