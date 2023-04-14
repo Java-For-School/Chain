@@ -13,7 +13,9 @@ public class Main {
     }
   
     Node<Integer> fibonacciList = createFibonacciList(12);
+    Node<Integer> odd = splitListToEvenOdd(fibonacciList);
     printList(fibonacciList);
+    printList(odd);
   }
 
   private static void printList(Node<Integer> first) {
@@ -68,8 +70,11 @@ public class Main {
         current = current.getNext();
         first = current;
       }
-      if (current.getNext().getValue() == value) {
+      else if (current.getNext().getValue() == value) {
         current.setNext(current.getNext().getNext());
+      }
+      else {
+        current = current.getNext();
       }
     }
     
@@ -118,5 +123,24 @@ public class Main {
     }
 
     return firstNode;
+  }
+  public static Node<Integer> splitListToEvenOdd(Node<Integer> first) {
+    boolean even = first.getValue() % 2 == 0;
+    
+    Node<Integer> newNode = new Node(0);
+    Node<Integer> current = first;
+    Node<Integer> currentNewNode = newNode;
+    
+    while (current.getNext() != null) {
+      if (even != (current.getNext().getValue() % 2 == 0)) {
+        currentNewNode.setNext(current.getNext());
+        currentNewNode = currentNewNode.getNext();
+        current.setNext(current.getNext().getNext());
+      } else {
+        current = current.getNext();
+      }
+    }
+
+    return newNode.getNext();
   }
 }
