@@ -2,21 +2,20 @@ package Chain;
 
 public class Main {
   public static void main(String[] args) {
-    Node<Integer> first = new Node(15);
+    Node<Integer> first = new Node(0);
     Node<Integer> current = first;
     Node<Integer> previous = first;
 
-    for (int i = 0; i < 12; i++) {
-      current = new Node(i % 3);
+    for (int i = 1; i < 12; i++) {
+      current = new Node(i * 2);
       previous.setNext(current);
       previous = current;
     }
     printList(first); 
-    System.out.printf("The list has: %d items.\n", getNumOfNodes(first));
-    removeValueFromList(first, 10);
-    removeValueFromList(first, 2);
+    insertIntoSortedList(first, 9);
+    insertIntoSortedList(first, 69);
+    insertIntoSortedList(first, 21);
     printList(first); 
-    System.out.printf("The list has: %d items.\n", getNumOfNodes(first));
   }
   private static void printList(Node<Integer> first) {
     System.out.print("[");
@@ -67,6 +66,20 @@ public class Main {
         current = next;
         next = next.getNext();
       }
+    }
+
+    return first;
+  }
+  public static Node<Integer> insertIntoSortedList(Node<Integer> first, int target) {
+    Node<Integer> current = first;
+    Node<Integer> newNode = new Node(target);
+    while (current.getNext() != null && current.getNext().getValue() < target) { current = current.getNext(); }
+    if (current.getNext() == null) {
+      current.setNext(newNode);
+    }
+    else {
+      newNode.setNext(current.getNext());
+      current.setNext(newNode);
     }
 
     return first;
