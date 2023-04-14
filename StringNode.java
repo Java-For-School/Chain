@@ -1,3 +1,5 @@
+package Chain;
+
 public class StringNode {
   private String value;
   private StringNode next;
