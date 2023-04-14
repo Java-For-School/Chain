@@ -12,6 +12,15 @@ public class Node <T> {
     this.value = value;
     this.next = next;
   }
+  public Node(Node<T> list) {
+    Node<T> first = new Node(list.getValue());
+    list = list.getNext();
+
+    while (list != null) {
+      first.setNext(new Node(list.getValue()));
+      list = list.getNext();
+    }
+  }
   public T getValue() {
     return value;
   }
