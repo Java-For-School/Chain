@@ -13,9 +13,12 @@ public class Main {
     }
   
     Node<Integer> fibonacciList = createFibonacciList(12);
-    Node<Integer> odd = splitListToEvenOdd(fibonacciList);
+    Node<Integer> newList = new Node(fibonacciList);
     printList(fibonacciList);
-    printList(odd);
+    printList(newList);
+    splitListToEvenOdd(fibonacciList);
+    printList(fibonacciList);
+    printList(newList);
   }
 
   private static void printList(Node<Integer> first) {

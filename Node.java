@@ -14,12 +14,18 @@ public class Node <T> {
   }
   public Node(Node<T> list) {
     Node<T> first = new Node(list.getValue());
+    Node<T> current = first;
+    
     list = list.getNext();
 
     while (list != null) {
-      first.setNext(new Node(list.getValue()));
+      current.setNext(new Node(list.getValue()));
+      current = current.getNext();
       list = list.getNext();
     }
+
+    this.value = first.getValue();
+    this.next = first.getNext();
   }
   public T getValue() {
     return value;
