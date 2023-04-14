@@ -11,9 +11,9 @@ public class Main {
       previous.setNext(current);
       previous = current;
     }
-    printList(first);
-    setSquared(first);
-    printList(first);
+  
+    Node<Integer> fibonacciList = createFibonacciList(12);
+    printList(fibonacciList);
   }
 
   private static void printList(Node<Integer> first) {
@@ -99,5 +99,24 @@ public class Main {
       first.setValue((int) Math.pow(first.getValue(), 2));
       first = first.getNext();
     } 
+  }
+  public static Node<Integer> createFibonacciList(int elements) {
+    int first = 0;
+    int second = 1;
+    int temp = 0;
+    
+    Node<Integer> firstNode = new Node(first);
+    Node<Integer> current = firstNode;
+
+    for (int i = 1; i < elements; i++) {
+      current.setNext(new Node(second)); 
+      current = current.getNext();
+      
+      temp = second;
+      second += first;
+      first = temp;
+    }
+
+    return firstNode;
   }
 }
