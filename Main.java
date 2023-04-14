@@ -7,12 +7,12 @@ public class Main {
     Node<Integer> previous = first;
 
     for (int i = 1; i < 12; i++) {
-      current = new Node(i % 2);
+      current = new Node(i % 4);
       previous.setNext(current);
       previous = current;
     }
     printList(first);
-    System.out.println(getSum(first));
+    setSquared(first);
     printList(first);
   }
 
@@ -93,5 +93,11 @@ public class Main {
     } 
     
     return sum;
+  }
+  public static void setSquared(Node<Integer> first) {
+    while (first != null) {
+      first.setValue((int) Math.pow(first.getValue(), 2));
+      first = first.getNext();
+    } 
   }
 }
