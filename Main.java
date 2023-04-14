@@ -12,7 +12,7 @@ public class Main {
       previous = current;
     }
     printList(first);
-    first = removeDuplicates(first);
+    System.out.println(getSum(first));
     printList(first);
   }
 
@@ -46,29 +46,6 @@ public class Main {
 
     return count;
   }
-  //public static Node<Integer> removeValueFromList(Node<Integer> first, int target) {
-  //  Node<Integer> current = first;
-  //  Node<Integer> next; 
-  //  
-
-  //  while (current.getValue() == target) current = current.getNext();
-  //  
-  //  next = current.getNext();
-  //  first = current;
-
-  //  while (next != null) {
-  //    if (next.getValue() == target) {
-  //      current.setNext(next.getNext());
-  //      next = current.getNext();
-  //    }
-  //    else {
-  //      current = next;
-  //      next = next.getNext();
-  //    }
-  //  }
-
-  //  return first;
-  //}
   public static Node<Integer> insertIntoSortedList(Node<Integer> first, int target) {
     Node<Integer> current = first;
     Node<Integer> newNode = new Node(target);
@@ -106,5 +83,15 @@ public class Main {
     }
 
     return first;
+  }
+  public static int getSum(Node<Integer> first) {
+    int sum = 0;
+
+    while (first != null) {
+      sum += first.getValue();
+      first = first.getNext();
+    } 
+    
+    return sum;
   }
 }
