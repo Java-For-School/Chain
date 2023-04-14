@@ -7,16 +7,15 @@ public class Main {
     Node<Integer> previous = first;
 
     for (int i = 1; i < 12; i++) {
-      current = new Node(i * 2);
+      current = new Node(i % 2);
       previous.setNext(current);
       previous = current;
     }
-    printList(first); 
-    insertIntoSortedList(first, 9);
-    insertIntoSortedList(first, 69);
-    insertIntoSortedList(first, 21);
-    printList(first); 
+    printList(first);
+    first = removeDuplicates(first);
+    printList(first);
   }
+
   private static void printList(Node<Integer> first) {
     System.out.print("[");
     while (first.getNext() != null) {
@@ -47,29 +46,29 @@ public class Main {
 
     return count;
   }
-  public static Node<Integer> removeValueFromList(Node<Integer> first, int target) {
-    Node<Integer> current = first;
-    Node<Integer> next; 
-    
+  //public static Node<Integer> removeValueFromList(Node<Integer> first, int target) {
+  //  Node<Integer> current = first;
+  //  Node<Integer> next; 
+  //  
 
-    while (current.getValue() == target) current = current.getNext();
-    
-    next = current.getNext();
-    first = current;
+  //  while (current.getValue() == target) current = current.getNext();
+  //  
+  //  next = current.getNext();
+  //  first = current;
 
-    while (next != null) {
-      if (next.getValue() == target) {
-        current.setNext(next.getNext());
-        next = current.getNext();
-      }
-      else {
-        current = next;
-        next = next.getNext();
-      }
-    }
+  //  while (next != null) {
+  //    if (next.getValue() == target) {
+  //      current.setNext(next.getNext());
+  //      next = current.getNext();
+  //    }
+  //    else {
+  //      current = next;
+  //      next = next.getNext();
+  //    }
+  //  }
 
-    return first;
-  }
+  //  return first;
+  //}
   public static Node<Integer> insertIntoSortedList(Node<Integer> first, int target) {
     Node<Integer> current = first;
     Node<Integer> newNode = new Node(target);
@@ -80,6 +79,30 @@ public class Main {
     else {
       newNode.setNext(current.getNext());
       current.setNext(newNode);
+    }
+
+    return first;
+  }
+  public static Node<Integer> removeValueFromList(Node<Integer> first, int value) {
+    Node<Integer> current = first;
+    
+    while (current != null) {
+      if (current.getValue() == value) {
+        current = current.getNext();
+        first = current;
+      }
+      if (current.getNext().getValue() == value) {
+        current.setNext(current.getNext().getNext());
+      }
+    }
+    
+    return first;
+  }
+  public static Node<Integer> removeDuplicates(Node<Integer> first) {
+    Node<Integer> current = first;
+
+    while (current != null) {
+      current.setNext(removeValueFromList(current.getNext(), current.getValue()));
     }
 
     return first;
