@@ -5,20 +5,25 @@ public class Main {
     Node<Integer> first = new Node(0);
     Node<Integer> current = first;
     Node<Integer> previous = first;
-
+    Node<Integer> second = new Node(0);
+    
     for (int i = 1; i < 12; i++) {
-      current = new Node(i % 4);
+      current = new Node(i * 2);
       previous.setNext(current);
       previous = current;
     }
-  
-    Node<Integer> fibonacciList = createFibonacciList(12);
-    Node<Integer> newList = new Node(fibonacciList);
-    printList(fibonacciList);
-    printList(newList);
-    splitListToEvenOdd(fibonacciList);
-    printList(fibonacciList);
-    printList(newList);
+    
+    current = second;
+    previous = second;
+
+    for (int i = 1; i < 12; i++) {
+      current = new Node(i);
+      previous.setNext(current);
+      previous = current;
+    }
+    printList(first);
+    printList(second);
+    printList(mergeTwoSortedChains(first, second));
   }
 
   private static void printList(Node<Integer> first) {
@@ -141,6 +146,37 @@ public class Main {
         current.setNext(current.getNext().getNext());
       } else {
         current = current.getNext();
+      }
+    }
+
+    return newNode.getNext();
+  }
+  public static Node<Integer> mergeTwoSortedChains(Node<Integer> first, Node<Integer> second) {
+    Node<Integer> newNode = new Node(0);
+    Node<Integer> current = newNode;
+
+    while (first != null || second != null) {
+      if (first == null) {
+        while (second != null) {
+          current.setNext(new Node(second.getValue()));
+          current = current.getNext();
+          second = second.getNext();
+        }
+      }
+      else if (second == null) {
+        while (first != null) {
+          current.setNext(new Node(first.getValue()));
+          current = current.getNext();
+          first = first.getNext();
+        }
+      }
+      else {
+        int smaller = Math.min(first.getValue(), second.getValue());
+        boolean firstSmaller = smaller == first.getValue();
+        current.setNext(new Node(firstSmaller ? first.getValue() : second.getValue()));
+        current = current.getNext();
+        if (firstSmaller) first = first.getNext();
+        else second = second.getNext();
       }
     }
 
