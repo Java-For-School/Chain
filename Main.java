@@ -21,8 +21,11 @@ public class Main {
       previous.setNext(current);
       previous = current;
     }
-  
-    printList(createRandomList(20));
+    Node<Integer> newList = createRandomList(20);
+    Node<Integer> completion = listBuild(newList, 100);
+
+    printList(newList);
+    printList(completion);
   }
 
   private static void printList(Node<Integer> first) {
@@ -196,4 +199,24 @@ public class Main {
 
     return first.getNext();
   }
+  public static Node<Integer> listBuild(Node<Integer> first, int number) {
+    Node<Integer> newNode = new Node(0);
+    Node<Integer> current = newNode;
+    Node<Integer> firstIterator = first;
+    
+    for (int i = 0; i < number; i++) {
+      boolean isInFirst = false;
+      while (firstIterator != null) {
+        if (firstIterator.getValue() == i) isInFirst = true; 
+        firstIterator = firstIterator.getNext();
+      }
+      if (!isInFirst) {
+        current.setNext(new Node(i));
+        current = current.getNext();
+      }
+    }
+    
+    return first.getNext();
+  }
+
 }
