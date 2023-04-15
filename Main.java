@@ -21,9 +21,8 @@ public class Main {
       previous.setNext(current);
       previous = current;
     }
-    printList(first);
-    printList(second);
-    printList(mergeTwoSortedChains(first, second));
+  
+    printList(createRandomList(20));
   }
 
   private static void printList(Node<Integer> first) {
@@ -181,5 +180,20 @@ public class Main {
     }
 
     return newNode.getNext();
+  }
+  public static Node<Integer> createRandomList(int nodes) {
+    Node<Integer> first = new Node(0);
+    Node<Integer> current = first;
+    
+    for (int i = 0; i < nodes; i ++) {
+      int number = 10 + (int) Math.round(Math.random() * 89.0);
+      if (number % 3 == 0) {
+        number -= 1;
+      }
+      current.setNext(new Node(number));
+      current = current.getNext();
+    }
+
+    return first.getNext();
   }
 }
