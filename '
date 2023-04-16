@@ -1,0 +1,23 @@
+package Chain;
+
+import java.util.Scanner;
+
+public class AddElementBinNodeLoop {
+  private static Scanner scanner = new Scanner(System.in);
+
+  public static void main(String[] args) {
+
+  }
+  private static void addElementBinNodeLoop(BinNode<Integer> node, int amountOfElements) {
+    BinNode<Integer> temp = node;
+
+    while (node.getNext() != null) node = node.getNext(); 
+    for (int i = 0; i < amountOfElements; i++) {
+      int element = scanner.nextInt();
+      node.setNext(element, node, null);
+      node = node.getNext();
+    }
+
+    System.out.println(temp.toString());
+  }
+}
